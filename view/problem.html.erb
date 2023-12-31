@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <h1 class="m-4 text-3xl font-bold">
+    漢字
+  </h1>
+  <div class="mx-4 h-80" style="writing-mode: vertical-rl">
+  <% @sentences.each do |sentence| %>
+  <% case sentence
+     when Kanji %>
+    <ruby>
+    <% sentence.each do |kanji, yomi| %>
+      <div class="inline-block size-7 text-center text-transparent box-border border border-blue-500"><%= kanji %></div><rp>(</rp><rt><%= yomi %></rt><rp>)</rp>
+    <% end %>
+    </ruby>
+  <% when Okuri %>
+    (
+    <ruby>
+    <% sentence.each do |kanji, yomi| %>
+      <div class="inline-block w-7 text-center text-transparent"><%= kanji %></div><rp>(</rp><rt><%= yomi %></rt><rp>)</rp>
+    <% end %>
+    </ruby>
+    )
+  <% else %>
+    <%= sentence %>
+  <% end %>
+  <% end %>
+</body>
+</html>
